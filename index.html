@@ -3,40 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XGAMERtechnologies</title>
-    <!-- Link to your CSS file -->
+    <title>Contact Us</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav>
-        <div class="logo">XGAMERtechnologies</div>
+    <header>
         <ul>
-            <li><a href="#">Gaming Computers</a></li>
-            <li><a href="#">GAMES</a></li>
-            <li><a href="#">PRODUCTS</a></li>
-            <li><a href="#">SERVICES</a></li>
-            <li><a href="#">Play live Game</a></li>
-            <li><a href="#">CONTACT US</a></li>
-            <!-- Add Cart and Customer Portal here -->
+            <li><a href="index.html">Home</a></li>
+            <li><a href="gaming_computers.html">Gaming Computers</a></li>
+            <li><a href="games.html">GAMES</a></li>
+            <li><a href="products.html">PRODUCTS</a></li>
+            <!-- Add links to other pages here -->
+            <li><a href="contact.html">CONTACT US</a></li>
         </ul>
-    </nav>
-
-    <!-- Main Content Section -->
-    <section class="landing-page">
-        <!-- Add your landing page content here -->
-        <h1>Welcome to XGAMERtechnologies</h1>
-        <p>Explore the latest in gaming computers, games, and accessories.</p>
-        <!-- You can add more content here -->
+        
+    
+    </header>
+    
+    <section class="contact-info">
+        <h2>Contacts & Map</h2>
+        <div>
+            <p>For enquiries on sales:</p>
+            <ol>
+                <li>Refer to prices provided on this website.</li>
+                <li>Clarifications are quick if you call us on <strong>+254 786 178372 or +254 726 178372</strong> any day 8 A.M - 8 P.M.</li>
+                <li>We do respond to WhatsApp and SMS as well.</li>
+                <li>Other means like Facebook, Twitter, emails, Instagram are also available but may not be quick or accurate as the first 3 means.</li>
+            </ol>
+        </div>
+        <div>
+            <p>For enquiries not related to sales:</p>
+            <!-- Contact Form -->
+            <form id="contactForm" method="post">
+                <label for="email">Your Email:</label>
+                <input type="email" id="email" name="email" required><br><br>
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject" required><br><br>
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required><br><br>
+                <label for="message">Message:</label><br>
+                <textarea id="message" name="message" rows="4" cols="50" required></textarea><br><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
     </section>
 
-    <!-- Footer Section -->
     <footer>
+        <!-- Include PHP for the phone number -->
         <div class="contact-info">
-            <!-- PHP Integration for Phone Number -->
-            <p>PHONE: <?php echo "+254 786 178372"; ?></p>
+            <p>PHONE: +254 786 178372 or +254 726 178372</p>
         </div>
-        <!-- Add more footer content as needed -->
     </footer>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+            // Get form data
+            var formData = new FormData(this);
+            // Make POST request to server
+            fetch('send_message.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                // Display server response
+                console.log(data);
+                alert('Message sent successfully!');
+                // Optionally, clear form fields
+                this.reset();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again later.');
+            });
+        });
+    </script>
 </body>
 </html>
